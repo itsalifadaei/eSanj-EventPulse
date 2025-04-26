@@ -32,13 +32,10 @@ message HourlyStatsRequest {
 }
 
 message HourlyStatsResponse {
-  repeated HourStat stats = 1;
-}
-
-message HourStat {
   string hour = 1;
   uint32 count = 2;
 }
+
 
 message TopUsersRequest {
   string event_type = 1;
@@ -46,10 +43,6 @@ message TopUsersRequest {
 }
 
 message TopUsersResponse {
-  repeated UserStat users = 1;
-}
-
-message UserStat {
   string user_id = 1;
   uint32 event_count = 2;
 }
