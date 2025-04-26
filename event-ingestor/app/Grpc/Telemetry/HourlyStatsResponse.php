@@ -15,13 +15,9 @@ use Google\Protobuf\Internal\GPBUtil;
 class HourlyStatsResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string hour = 1;</code>
+     * Generated from protobuf field <code>repeated .telemetry.HourStat stats = 1;</code>
      */
-    protected $hour = '';
-    /**
-     * Generated from protobuf field <code>uint32 count = 2;</code>
-     */
-    protected $count = 0;
+    private $stats;
 
     /**
      * Constructor.
@@ -29,8 +25,7 @@ class HourlyStatsResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $hour
-     *     @type int $count
+     *     @type array<\Telemetry\HourStat>|\Google\Protobuf\Internal\RepeatedField $stats
      * }
      */
     public function __construct($data = NULL) {
@@ -39,45 +34,23 @@ class HourlyStatsResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string hour = 1;</code>
-     * @return string
+     * Generated from protobuf field <code>repeated .telemetry.HourStat stats = 1;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
      */
-    public function getHour()
+    public function getStats()
     {
-        return $this->hour;
+        return $this->stats;
     }
 
     /**
-     * Generated from protobuf field <code>string hour = 1;</code>
-     * @param string $var
+     * Generated from protobuf field <code>repeated .telemetry.HourStat stats = 1;</code>
+     * @param array<\Telemetry\HourStat>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
-    public function setHour($var)
+    public function setStats($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->hour = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>uint32 count = 2;</code>
-     * @return int
-     */
-    public function getCount()
-    {
-        return $this->count;
-    }
-
-    /**
-     * Generated from protobuf field <code>uint32 count = 2;</code>
-     * @param int $var
-     * @return $this
-     */
-    public function setCount($var)
-    {
-        GPBUtil::checkUint32($var);
-        $this->count = $var;
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Telemetry\HourStat::class);
+        $this->stats = $arr;
 
         return $this;
     }

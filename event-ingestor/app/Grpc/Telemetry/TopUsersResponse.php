@@ -15,13 +15,9 @@ use Google\Protobuf\Internal\GPBUtil;
 class TopUsersResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string user_id = 1;</code>
+     * Generated from protobuf field <code>repeated .telemetry.UserStat users = 1;</code>
      */
-    protected $user_id = '';
-    /**
-     * Generated from protobuf field <code>uint32 event_count = 2;</code>
-     */
-    protected $event_count = 0;
+    private $users;
 
     /**
      * Constructor.
@@ -29,8 +25,7 @@ class TopUsersResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $user_id
-     *     @type int $event_count
+     *     @type array<\Telemetry\UserStat>|\Google\Protobuf\Internal\RepeatedField $users
      * }
      */
     public function __construct($data = NULL) {
@@ -39,45 +34,23 @@ class TopUsersResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string user_id = 1;</code>
-     * @return string
+     * Generated from protobuf field <code>repeated .telemetry.UserStat users = 1;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
      */
-    public function getUserId()
+    public function getUsers()
     {
-        return $this->user_id;
+        return $this->users;
     }
 
     /**
-     * Generated from protobuf field <code>string user_id = 1;</code>
-     * @param string $var
+     * Generated from protobuf field <code>repeated .telemetry.UserStat users = 1;</code>
+     * @param array<\Telemetry\UserStat>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
-    public function setUserId($var)
+    public function setUsers($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->user_id = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>uint32 event_count = 2;</code>
-     * @return int
-     */
-    public function getEventCount()
-    {
-        return $this->event_count;
-    }
-
-    /**
-     * Generated from protobuf field <code>uint32 event_count = 2;</code>
-     * @param int $var
-     * @return $this
-     */
-    public function setEventCount($var)
-    {
-        GPBUtil::checkUint32($var);
-        $this->event_count = $var;
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Telemetry\UserStat::class);
+        $this->users = $arr;
 
         return $this;
     }
