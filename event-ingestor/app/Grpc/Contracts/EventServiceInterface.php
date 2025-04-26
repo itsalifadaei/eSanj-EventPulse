@@ -9,5 +9,5 @@ use Telemetry\EventPushResponse;
 interface EventServiceInterface
 {
     const NAME = "telemetry.EventService";
-    public function Push(ContextInterface $ctx, Event $in): EventPushResponse;
+    public function Push(ContextInterface $ctx, Event $req): EventPushResponse;
 }

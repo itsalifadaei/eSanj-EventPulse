@@ -2,15 +2,15 @@
 
 namespace App\Grpc;
 
-
-use App\Grpc\Contracts\EventServiceInterface;
-use App\Grpc\Services\EventService;
+use App\Grpc\Contracts\{EventServiceInterface, StatsServiceInterface};
+use App\Grpc\Services\{EventGrpcService, StatsGrpcService};
 use Spiral\RoadRunner\GRPC\Server;
 
 class Kernel
 {
     protected array $services = [
-        EventServiceInterface::class => EventService::class,
+        EventServiceInterface::class => EventGrpcService::class,
+        StatsServiceInterface::class => StatsGrpcService::class,
     ];
 
     public function register(Server $server): void
