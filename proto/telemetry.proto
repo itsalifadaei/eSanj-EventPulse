@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package telemetry;
+
+import "google/protobuf/timestamp.proto";
+
+service EventService {
+  rpc Push (Event) returns (EventPushResponse);
+}
+
+message Event {
+  string user_id = 1;
+  string event_type = 2;
+  google.protobuf.Timestamp happened_at = 3;
+  map<string, string> metadata = 4;
+}
+
+message EventPushResponse {
+  bool success = 1;
+  string message = 2;
+}
