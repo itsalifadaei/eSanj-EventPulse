@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="6036ab3c-c017-40d0-a2f4-a368bab05e2b" name="main">
+        <fileTransfer rootFolder="/var/www/esanj.alifadaei.dev" accessType="SFTP" host="5.42.217.18" port="2290" sshConfigId="ac701821-7875-4ad7-9620-071385a96481" sshConfig="root@5.42.217.18:2290 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
