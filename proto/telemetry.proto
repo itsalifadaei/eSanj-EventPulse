@@ -4,6 +4,7 @@ package telemetry;
 
 import "google/protobuf/timestamp.proto";
 
+// ─────── EVENTS INGESTION ──────────────────────────────────────
 service EventService {
   rpc Push (Event) returns (EventPushResponse);
 }
@@ -18,4 +19,37 @@ message Event {
 message EventPushResponse {
   bool success = 1;
   string message = 2;
+}
+
+// ─────── EVENTS QUERYING ──────────────────────────────────────
+service EventQuery {
+  rpc GetHourlyStats (HourlyStatsRequest) returns (HourlyStatsResponse);
+  rpc GetTopUsers    (TopUsersRequest) returns (TopUsersResponse);
+}
+
+message HourlyStatsRequest {
+  string event_type = 1;
+}
+
+message HourlyStatsResponse {
+  repeated HourStat stats = 1;
+}
+
+message HourStat {
+  string hour = 1;
+  uint32 count = 2;
+}
+
+message TopUsersRequest {
+  string event_type = 1;
+  uint32 limit = 2;
+}
+
+message TopUsersResponse {
+  repeated UserStat users = 1;
+}
+
+message UserStat {
+  string user_id = 1;
+  uint32 event_count = 2;
 }
