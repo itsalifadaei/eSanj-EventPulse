@@ -2,44 +2,40 @@
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
-    <title>داشبورد رویدادهای کاربران - Vue</title>
+    <title>Dashboard نمودار</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Load VueJS -->
-    <script src="https://unpkg.com/vue@3"></script>
-
-    <!-- Load Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font/dist/font-face.css" rel="stylesheet">
 </head>
 <body>
+<div id="app">
+    <h1>داشبورد رویدادها</h1>
 
-<div id="app" class="container">
-    <h1>📊 داشبورد رویدادها</h1>
+    <div class="container">
 
-    <div class="controls">
-        <label for="eventType">نوع رویداد:</label>
-        <select id="eventType" v-model="eventType" @change="onEventTypeChange">
-            <option value="all">همه</option>
-            <option value="click">کلیک</option>
-            <option value="view">بازدید</option>
-            <option value="purchase">خرید</option>
-        </select>
-    </div>
+        <div class="select-container">
+            <select v-model="eventType" @change="onEventTypeChange">
+                <option value="all">همه رویدادها</option>
+                <option value="view_page">بازدید</option>
+                <option value="purchase">خرید</option>
+                <option value="refund">بازگشت وجه</option>
+                <option value="discount">تخفیف</option>
+                <option value="payment">پرداخت</option>
+            </select>
+        </div>
 
-    <div class="chart-container">
-        <canvas id="hourlyChart"></canvas>
-    </div>
+        <div class="chart-box">
+            <canvas id="hourlyChart"></canvas>
+        </div>
 
-    <div class="chart-container">
-        <canvas id="topUsersChart"></canvas>
+        <div class="chart-box">
+            <canvas id="topUsersChart"></canvas>
+        </div>
+
     </div>
 </div>
 
-<!-- Load Configs -->
-<script src="env.js"></script>
-
-<!-- Load App -->
 <script src="app.js"></script>
-
 </body>
 </html>
