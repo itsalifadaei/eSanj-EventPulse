@@ -12,11 +12,10 @@ services:
       CLICKHOUSE_DATABASE: ${CLICKHOUSE_DATABASE:-database}
       CLICKHOUSE_USERNAME: ${CLICKHOUSE_USER:-default}
       CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-password}
-      WAIT_TIMEOUT: 15
     volumes:
       - ./proto:/proto
     ports:
-      - "${GRPC_PORT:-9101}:9001"
+      - "${GRPC_PORT:-9001}:9001"
     depends_on:
       - clickhouse
     networks:
@@ -32,9 +31,9 @@ services:
     environment:
       OCTANE_SERVER: swoole
       GRPC_HOST: event-ingestor
-      GRPC_PORT: ${GRPC_PORT:-9001}
-    ports:
-      - "${API_PORT:-8000}:8000"
+      GRPC_PORT: 9001
+    expose:
+      - "8000"
     networks:
       - app-net
 
@@ -48,8 +47,8 @@ services:
       CLICKHOUSE_USER: ${CLICKHOUSE_USER:-default}
       CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-password}
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
-    ports:
-      - "8123:8123"
+    expose:
+      - "8123"
     networks:
       - app-net
 
@@ -62,8 +61,6 @@ services:
     ports:
       - "${APP_PORT:-8080}:80"
     restart: unless-stopped
-    depends_on:
-      - query-api
     networks:
       - app-net
 

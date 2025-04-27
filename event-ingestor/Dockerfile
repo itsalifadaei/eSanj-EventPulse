@@ -17,6 +17,8 @@ RUN ./vendor/bin/rr get-binary
 RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs \
     && chmod -R 775 storage bootstrap/cache
 
+RUN rm -rf /var/lib/apt/lists/* /tmp/*
+
 COPY docker/event-ingestor/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN chmod +x /usr/local/bin/entrypoint.sh
