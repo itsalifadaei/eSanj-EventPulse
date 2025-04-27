@@ -20,13 +20,6 @@ for i in $(seq 1 ${WAIT_TIMEOUT:-15}); do
     if nc -z "${CLICKHOUSE_HOST}" "${CLICKHOUSE_PORT}"; then
         echo "✅ Clickhouse is up!"
 
-        sed -i "s|CLICKHOUSE_HOST=.*|CLICKHOUSE_HOST=${CLICKHOUSE_HOST}|" .env
-        sed -i "s|CLICKHOUSE_PORT=.*|CLICKHOUSE_PORT=${CLICKHOUSE_PORT}|" .env
-        sed -i "s|CLICKHOUSE_DATABASE=.*|CLICKHOUSE_DATABASE=${CLICKHOUSE_DATABASE}|" .env
-        sed -i "s|CLICKHOUSE_USERNAME=.*|CLICKHOUSE_USERNAME=${CLICKHOUSE_USERNAME}|" .env
-        sed -i "s|CLICKHOUSE_PASSWORD=.*|CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}|" .env
-
-
         echo "📦 Running ClickHouse Migrations..."
         php artisan migrate --force|| true
 

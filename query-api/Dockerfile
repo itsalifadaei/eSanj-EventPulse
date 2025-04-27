@@ -2,9 +2,9 @@ FROM phpswoole/swoole:6.0.1-php8.3
 
 WORKDIR /app
 
+RUN apt update && apt install -y autoconf zlib1g-dev php-dev php-pear \
+    && pecl install grpc
 
-
-RUN pecl install grpc
 RUN docker-php-ext-enable grpc
 RUN docker-php-ext-install pcntl
 
@@ -19,10 +19,7 @@ RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framewor
     && chmod -R 775 storage bootstrap/cache
 
 ENV APP_ENV=production
-ENV OCTANE_SERVER=swoole
 ENV APP_DEBUG=true
-ENV GRPC_HOST=event-ingestor
-ENV GRPC_PORT=9001
 
 EXPOSE 8000
 

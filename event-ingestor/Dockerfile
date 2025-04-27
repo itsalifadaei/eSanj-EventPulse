@@ -1,8 +1,8 @@
 FROM phpswoole/swoole:6.0.1-php8.3
 
+RUN apt update && apt install -y netcat-openbsd
 
-RUN  pecl install grpc && docker-php-ext-enable grpc \
-    && docker-php-ext-install  sockets
+RUN docker-php-ext-install sockets
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN composer install --optimize-autoloader --no-dev
 RUN ./vendor/bin/rr get-binary
 
 RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs \
-    && chmod -R 775 storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
 COPY docker/event-ingestor/entrypoint.sh /usr/local/bin/entrypoint.sh
 
