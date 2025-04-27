@@ -23,20 +23,20 @@ message EventPushResponse {
 
 // ─────── EVENTS QUERYING ──────────────────────────────────────
 service EventQuery {
-  rpc GetDailyStats (DailyStatsRequest) returns (DailyStatsResponse);
+  rpc GetHourlyStats (HourlyStatsRequest) returns (HourlyStatsResponse);
   rpc GetTopUsers    (TopUsersRequest) returns (TopUsersResponse);
 }
 
-message DailyStatsRequest {
+message HourlyStatsRequest {
   string event_type = 1;
 }
 
 
-message DailyStatsResponse {
-  repeated DailyStat stats = 1;
+message HourlyStatsResponse {
+  repeated HourlyStat stats = 1;
 }
 
-message DailyStat {
+message HourlyStat {
   string count = 1;
   string happened_at = 2;
 }
