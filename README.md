@@ -86,7 +86,7 @@ grpcurl -plaintext -d '{
   "metadata": {
     "ip": "127.0.0.1"
   }
-}' localhost:9101 telemetry.EventService/Push
+}' localhost:9001 telemetry.EventService/Push
 ```
 
 ## Rest API

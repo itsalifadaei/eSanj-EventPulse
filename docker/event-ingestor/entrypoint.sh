@@ -16,7 +16,7 @@ fi
 
 echo "💬 Waiting for Clickhouse to be up (${CLICKHOUSE_HOST}:${CLICKHOUSE_PORT}) ..."
 
-for i in $(seq 1 ${WAIT_TIMEOUT:-15}); do
+for i in $(seq 1 ${WAIT_TIMEOUT:-30}); do
     if nc -z "${CLICKHOUSE_HOST}" "${CLICKHOUSE_PORT}"; then
         echo "✅ Clickhouse is up!"
 
@@ -26,7 +26,7 @@ for i in $(seq 1 ${WAIT_TIMEOUT:-15}); do
         break
     fi
     echo "⏳ Waiting for ClickHouse..."
-    sleep 1
+    sleep 5
 done
 
 
