@@ -15,7 +15,7 @@ class StatsService
 
     public function __construct()
     {
-        $this->client = new EventQueryClient("127.0.0.1:9001", [
+        $this->client = new EventQueryClient(config('grpc.host') . ":" . config('grpc.port'), [
             'credentials' => ChannelCredentials::createInsecure(),
         ]);
     }

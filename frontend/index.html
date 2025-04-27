@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>داشبورد رویدادهای کاربران - Vue</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Load VueJS -->
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <!-- Load Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div id="app" class="container">
+    <h1>📊 داشبورد رویدادها</h1>
+
+    <div class="controls">
+        <label for="eventType">نوع رویداد:</label>
+        <select id="eventType" v-model="eventType" @change="onEventTypeChange">
+            <option value="all">همه</option>
+            <option value="click">کلیک</option>
+            <option value="view">بازدید</option>
+            <option value="purchase">خرید</option>
+        </select>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="hourlyChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="topUsersChart"></canvas>
+    </div>
+</div>
+
+<!-- Load Configs -->
+<script src="env.js"></script>
+
+<!-- Load App -->
+<script src="app.js"></script>
+
+</body>
+</html>
