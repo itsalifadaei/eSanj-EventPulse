@@ -5,16 +5,17 @@ namespace Telemetry;
 
 use Grpc\BaseStub;
 
+/**
+ * Client stub for EventService.
+ */
 class EventQueryClient extends BaseStub
 {
     /**
-     * Constructor
-     *
-     * @param string $hostname
-     * @param array $opts
-     * @param \Grpc\Channel $channel (optional)
+     * @param string $hostname hostname
+     * @param array $opts channel options
+     * @param \Grpc\Channel|null $channel (optional) re-use existing channel
      */
-    public function __construct($hostname, $opts = [], $channel = null)
+    public function __construct(string $hostname, array $opts = [], ?\Grpc\Channel $channel = null)
     {
         parent::__construct($hostname, $opts, $channel);
     }
