@@ -11,14 +11,14 @@ class StatsService
     {
     }
 
-    public function getDailyStats(string $type): array
+    public function getHourlyStats(string $type = null): array
     {
         $type = EventTypeEnum::getType($type);
 
-        return $this->eventRepository->getDailyEvents($type);
+        return $this->eventRepository->getHourlyEvents($type);
     }
 
-    public function getTopUsers(string $type, int $limit = 100): array
+    public function getTopUsers(string $type = null, int $limit = 100): array
     {
         $type = EventTypeEnum::getType($type);
 

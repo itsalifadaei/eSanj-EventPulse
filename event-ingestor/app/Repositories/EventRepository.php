@@ -28,20 +28,24 @@ class EventRepository
     /**
      * Get daily event statistics
      */
-    public function getDailyEvents(string $event_type): array
+    public function getHourlyEvents(string $event_type = null): array
     {
-        $sql = "WITH dates AS (SELECT today() - INTERVAL number DAY AS date FROM numbers(30))
-                SELECT d.date, SUM(e.event_exists) AS count
-                FROM dates d LEFT JOIN (SELECT toDate(happened_at) AS date, 1 AS event_exists
-                FROM events WHERE event_type = '$event_type') e ON e.date = d.date
-               GROUP BY d.date ORDER BY d.date DESC;";
+        if ($event_type) {
+            $event_type = "AND event_type = '$event_type'";
+        }
+
+        $sql = "WITH hours AS (SELECT toStartOfHour(now() - INTERVAL number HOUR) AS date FROM numbers(24))
+        SELECT h.date, IFNULL(e.cnt, 0) AS count FROM hours AS h LEFT JOIN (SELECT toStartOfHour(happened_at) AS date,
+        COUNT(*) AS cnt FROM events WHERE happened_at >= now() - INTERVAL 24 HOUR $event_type GROUP BY date) AS e
+        ON h.date = e.date ORDER BY h.date DESC;";
 
         return $this->connection->select($sql);
     }
 
     public function getTopUsers(string $event_type, int $limit = 100): array
     {
-        $sql = "SELECT user_id, COUNT(*) AS event_count FROM events WHERE event_type = '$event_type' GROUP BY user_id ORDER BY event_count DESC LIMIT $limit";
+        $type = $event_type ? "WHERE event_type = '$event_type'" : "";
+        $sql = "SELECT user_id, COUNT(*) AS event_count FROM events $type GROUP BY user_id ORDER BY event_count DESC LIMIT $limit";
 
         return $this->connection->select($sql);
     }

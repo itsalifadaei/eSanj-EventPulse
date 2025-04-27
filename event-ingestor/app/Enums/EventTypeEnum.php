@@ -21,7 +21,7 @@ enum EventTypeEnum: string
             self::REFUND->value => self::REFUND->value,
             self::DISCOUNT->value => self::DISCOUNT->value,
             self::PAYMENT->value => self::PAYMENT->value,
-            default => "none",
+            default => "",
         };
     }
 }

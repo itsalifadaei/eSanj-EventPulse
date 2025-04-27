@@ -5,7 +5,7 @@ namespace App\Grpc\Services;
 use App\Grpc\Contracts\StatsServiceInterface;
 use App\Services\StatsService;
 use Spiral\RoadRunner\GRPC\{ContextInterface, ServiceInterface};
-use Telemetry\{DailyStat, DailyStatsRequest, DailyStatsResponse, TopUsersRequest, TopUsersResponse, UserStat};
+use Telemetry\{HourlyStat, HourlyStatsRequest, HourlyStatsResponse, TopUsersRequest, TopUsersResponse, UserStat};
 
 
 class StatsGrpcService implements StatsServiceInterface, ServiceInterface
@@ -14,16 +14,16 @@ class StatsGrpcService implements StatsServiceInterface, ServiceInterface
     {
     }
 
-    public function GetDailyStats(ContextInterface $ctx, DailyStatsRequest $req): DailyStatsResponse
+    public function GetHourlyStats(ContextInterface $ctx, HourlyStatsRequest $req): HourlyStatsResponse
     {
         $event_type = $req->getEventType();
 
-        $statsRows = $this->statsService->getDailyStats($event_type);
+        $statsRows = $this->statsService->getHourlyStats($event_type);
 
-        $response = new DailyStatsResponse();
+        $response = new HourlyStatsResponse();
 
         foreach ($statsRows as $row) {
-            $hourStat = new DailyStat();
+            $hourStat = new HourlyStat();
             $hourStat->setCount($row['count']);
             $hourStat->setHappenedAt($row['date']);
 
