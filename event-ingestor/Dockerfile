@@ -1,9 +1,8 @@
-FROM php:8.3-cli
+FROM phpswoole/swoole:6.0.1-php8.3
 
-RUN apt-get update && apt-get install -y \
-    git unzip curl netcat-openbsd \
-    libpq-dev libzip-dev libssl-dev libcurl4-openssl-dev \
-    && docker-php-ext-install pdo pdo_mysql sockets
+
+RUN  pecl install grpc && docker-php-ext-enable grpc \
+    && docker-php-ext-install  sockets
 
 WORKDIR /app
 
@@ -15,11 +14,15 @@ RUN composer install --optimize-autoloader --no-dev
 
 RUN ./vendor/bin/rr get-binary
 
-RUN chmod -R 755 ./storage ./bootstrap/cache
+RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs \
+    && chmod -R 775 storage bootstrap/cache \
 
 COPY docker/event-ingestor/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENV APP_ENV=production
+ENV APP_DEBUG=false
 
 EXPOSE 9001
 
